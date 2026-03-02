@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../ShippingAPI.Test/ShippingAPI.Test.csproj" Id="3cba5672-fba4-4953-8662-79752faf1b14" />
   <Project Path="ShippingAPI.csproj" />
 </Solution>

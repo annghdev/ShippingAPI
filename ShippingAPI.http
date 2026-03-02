@@ -1,6 +1,46 @@
 @ShippingAPI_HostAddress = http://localhost:5049
 
-GET {{ShippingAPI_HostAddress}}/weatherforecast/
+### 1. Get Available Services (HCM Quận 1 → Hà Nội Ba Đình)
+GET {{ShippingAPI_HostAddress}}/api/shippings/services?from_district=1442&to_district=1542
 Accept: application/json
 
-###
+### 2. Calculate Shipping Fee
+POST {{ShippingAPI_HostAddress}}/api/shippings/calculate-fee
+Content-Type: application/json
+
+{
+  "fromDistrictId": 1442,
+  "fromWardCode": "21012",
+  "toDistrictId": 1542,
+  "toWardCode": "1A0101",
+  "weight": 500,
+  "length": 20,
+  "width": 15,
+  "height": 10,
+  "serviceId": 53321,
+  "insuranceValue": 100000
+}
+
+### 3. Create Shipping Order
+POST {{ShippingAPI_HostAddress}}/api/shippings/orders
+Content-Type: application/json
+
+{
+  "toName": "Nguyễn Văn A",
+  "toPhone": "0901234567",
+  "toAddress": "123 Nguyễn Huệ, Phường Bến Nghé",
+  "toWardCode": "21012",
+  "toDistrictId": 1442,
+  "weight": 500,
+  "length": 20,
+  "width": 15,
+  "height": 10,
+  "serviceId": 53321,
+  "insuranceValue": 100000,
+  "codAmount": 0
+}
+
+### 4. Get Tracking (replace {orderId} with actual ID from step 3)
+@orderId = 07264d4a-63b2-4d10-847d-3f4fdda96cd4
+GET {{ShippingAPI_HostAddress}}/api/shippings/orders/{{orderId}}/tracking
+Accept: application/json
