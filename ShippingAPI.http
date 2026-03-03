@@ -42,5 +42,38 @@ Content-Type: application/json
 
 ### 4. Get Tracking (replace {orderId} with actual ID from step 3)
 @orderId = 07264d4a-63b2-4d10-847d-3f4fdda96cd4
-GET {{ShippingAPI_HostAddress}}/api/shippings/orders/{{orderId}}/tracking
+GET {{ShippingAPI_HostAddress}}/api/shipping/v1/orders/{{orderId}}/tracking
 Accept: application/json
+
+###################################################################
+# GHTK Endpoints
+###################################################################
+
+### 5. GHTK - Calculate Shipping Fee
+GET {{ShippingAPI_HostAddress}}/api/shipping/ghtk/calculate-fee?pickProvince=TP.%20H%E1%BB%93%20Ch%C3%AD%20Minh&pickDistrict=Qu%E1%BA%ADn%203&province=H%C3%A0%20N%E1%BB%99i&district=Qu%E1%BA%ADn%20C%E1%BA%A7u%20Gi%E1%BA%A5y&address=P.503%20t%C3%B2a%20nh%C3%A0%20Auu%20Vi%E1%BB%87t&weight=1000&value=3000000&transport=road
+Accept: application/json
+
+### 6. GHTK - Create Shipping Order
+POST {{ShippingAPI_HostAddress}}/api/shipping/ghtk/orders
+Content-Type: application/json
+
+{
+  "name": "Nguyễn Văn A",
+  "tel": "0901234567",
+  "address": "123 Nguyễn Huệ, Phường Bến Nghé",
+  "province": "TP. Hồ Chí Minh",
+  "district": "Quận 1",
+  "ward": "Phường Bến Nghé",
+  "pickMoney": 47000,
+  "value": 3000000,
+  "weight": 500,
+  "transport": "road",
+  "productName": "Điện thoại",
+  "productQuantity": 1
+}
+
+### 7. GHTK - Get Tracking (replace {ghtkOrderId} with actual ID from step 6)
+@ghtkOrderId = 00000000-0000-0000-0000-000000000000
+GET {{ShippingAPI_HostAddress}}/api/shipping/ghtk/orders/{{ghtkOrderId}}/tracking
+Accept: application/json
+

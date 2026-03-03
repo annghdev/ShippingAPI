@@ -15,8 +15,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // GHN Settings
 builder.Services.Configure<GhnSettings>(builder.Configuration.GetSection("GHN"));
 
+// GHTK Settings
+builder.Services.Configure<GhtkSettings>(builder.Configuration.GetSection("GHTK"));
+
 // HttpClient for GHN API
 builder.Services.AddHttpClient("GHN");
+
+// HttpClient for GHTK API
+builder.Services.AddHttpClient("GHTK");
 
 var app = builder.Build();
 

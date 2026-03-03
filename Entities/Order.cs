@@ -25,8 +25,16 @@ public class Order
     public int InsuranceValue { get; set; }
     public int CodAmount { get; set; }
 
+    // Shipping provider
+    public ShippingProvider Provider { get; set; } = ShippingProvider.GHN;
+
     // GHN response data
     public string? GhnOrderCode { get; set; }
+
+    // GHTK response data
+    public string? GhtkLabel { get; set; }
+    public long? GhtkTrackingId { get; set; }
+
     public decimal? ShippingFee { get; set; }
 
     // Status

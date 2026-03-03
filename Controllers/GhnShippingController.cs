@@ -9,9 +9,9 @@ using ShippingAPI.Models.Settings;
 
 namespace ShippingAPI.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/shipping/ghn")]
 [ApiController]
-public class ShippingsController : ControllerBase
+public class GhnShippingController : ControllerBase
 {
     private readonly AppDbContext _db;
     private readonly IHttpClientFactory _httpClientFactory;
@@ -21,7 +21,7 @@ public class ShippingsController : ControllerBase
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
     };
 
-    public ShippingsController(
+    public GhnShippingController(
         AppDbContext db,
         IHttpClientFactory httpClientFactory,
         IOptions<GhnSettings> ghnOptions)
@@ -35,7 +35,7 @@ public class ShippingsController : ControllerBase
     // 1. POST /api/shippings/orders  – Tạo đơn giao hàng
     // ──────────────────────────────────────────────
     [HttpPost("orders")]
-    public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
+    public async Task<IActionResult> CreateOrder([FromBody] GhnCreateOrderRequest request)
     {
         var client = _httpClientFactory.CreateClient("GHN");
 
@@ -127,7 +127,7 @@ public class ShippingsController : ControllerBase
     // 2. POST /api/shippings/calculate-fee  – Tính phí ship
     // ──────────────────────────────────────────────
     [HttpPost("calculate-fee")]
-    public async Task<IActionResult> CalculateFee([FromBody] CalculateFeeRequest request)
+    public async Task<IActionResult> CalculateFee([FromBody] GhnCalculateFeeRequest request)
     {
         var client = _httpClientFactory.CreateClient("GHN");
 

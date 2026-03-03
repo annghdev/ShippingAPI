@@ -15,3 +15,9 @@ public enum ShippingStatus
     Returned,
     Cancelled
 }
+
+public enum ShippingProvider
+{
+    GHN,
+    GHTK
+}
